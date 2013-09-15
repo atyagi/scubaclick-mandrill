@@ -1,0 +1,23 @@
+{
+    "name": "scubaclick/mandrill",
+    "description": "Access the Mandrill API via Guzzle",
+    "keywords": ["mandrill", "laravel", "guzzle"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Boris Glumpler",
+            "email": "tech@scubaclick.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "4.0.*",
+        "guzzle/guzzle": "3.7.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Scubaclick\\Mandrill": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}
