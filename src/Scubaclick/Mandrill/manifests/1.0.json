@@ -52,6 +52,18 @@
                     "location": "json",
                     "description": "The Mandrill API key"
                 },
+                "template_name": {
+                    "required": true,
+                    "type": "string",
+                    "location": "json",
+                    "description": "The template name to send."
+                },
+                "template_content": {
+                    "required": true,
+                    "type": "array",
+                    "location": "json",
+                    "description": "The template content to send."
+                },
                 "message": {
                     "required": true,
                     "type": "array",
