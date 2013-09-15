@@ -6,8 +6,9 @@ return array(
     |--------------------------------------------------------------------------
     | Holds the client class
     |--------------------------------------------------------------------------
-    | The secret below is the current test API key provided by Stripe.
-    | It must be changed with your own by publishing this config file
+    | If this class gets changed, then the new class should extend
+    | ScubaClick\Mandrill\MandrillClient. That way you can implement any 
+    | custom methods.
     */
 
     'class' => '\\ScubaClick\\Mandrill\\MandrillClient',

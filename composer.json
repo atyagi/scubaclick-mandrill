@@ -16,7 +16,7 @@
     },
     "autoload": {
         "psr-0": {
-            "Scubaclick\\Mandrill": "src/"
+            "ScubaClick\\Mandrill": "src/"
         }
     },
     "minimum-stability": "dev"
