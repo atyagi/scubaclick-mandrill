@@ -1,17 +1,22 @@
 ScubaClick Mandrill
 ==================
 
-API wrapper for Mandrill via Guzzle
+Provides a Guzzle service description to access the [Mandrill](https://mandrillapp.com) API.
 
-Installation
-------------
+General Installation
+--------------------
 
 Install by adding the following to the require block in composer.json:
 ```
 "scubaclick/mandrill": "dev-master"
 ```
 
-Then add the following in app/config/app.php to the service providers array:
+Then run `composer update`.
+
+Laravel-specific Installation
+-----------------------------
+
+Add the following in app/config/app.php to the service providers array:
 ```php
 'ScubaClick\Mandrill\Providers\LaravelServiceProvider',
 ```
@@ -24,6 +29,18 @@ Then add to the aliases array the following:
 To change the configuration values, run the following command in the console:
 ```php
 php artisan config:publish scubaclick/mandrill
+```
+
+Usage
+-----
+
+```php
+$response = \Mandrill::sendEmail([
+	'message' => [
+		// message configuration
+	],
+	'async' => true,
+]);
 ```
 
 Documentation

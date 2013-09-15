@@ -1,7 +1,7 @@
 <?php namespace ScubaClick\Mandrill\Providers;
 
+use ScubaClick\Mandrill\MandrillClient;
 use Illuminate\Support\ServiceProvider;
-use ScubaClick\Mandrill\Exceptions\MissingClassException;
 
 class LaravelServiceProvider extends ServiceProvider
 {
@@ -30,16 +30,15 @@ class LaravelServiceProvider extends ServiceProvider
 	public function register()
 	{
         $this->app['mandrill'] = $this->app->share(function($app) {
-			$password  = $app['config']->get('mail.password');
-			$fromName  = $app['config']->get('mail.from.name');
-			$fromEmail = $app['config']->get('mail.from.email');
-			$class     = $app['config']->get('mandrill::class');
+			$password     = $app['config']->get('mandrill::password');
+			$version      = $app['config']->get('mandrill::version');
+			$manifestPath = $app['config']->get('mandrill::manifest_path');
 
-			if(!class_exists($class)) {
-				throw new MissingClassException;
+			if(empty($password)) {
+				$password = $app['config']->get('mail.password');
 			}
 
-            return new $class($password, $fromName, $fromEmail);
+            return new MandrillClient($password, $version, $manifestPath);
         });
 	}
 

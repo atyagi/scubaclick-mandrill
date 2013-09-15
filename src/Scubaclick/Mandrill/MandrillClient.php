@@ -1,84 +1,46 @@
 <?php namespace ScubaClick\Mandrill;
 
-use Guzzle\Http\Client;
-use Illuminate\Support\Str;
-use Guzzle\Http\Exception\BadResponseException;
+use Guzzle\Service\Client;
+use Guzzle\Service\Description\ServiceDescription;
 
-class Mandrill
+class MandrillClient extends Client
 {
-    /**
-     * Holds the base endpoint
-     *
-     * @var string
-     */
-    protected $endpoint = 'https://mandrillapp.com/api/1.0';
+    const VERSION = '1.0';
 
     /**
-     * Start it off
-     *
+     * Get the show on the road!
+     * 
      * @param string $password
-     * @param string $fromName
-     * @param string $fromEmail
+     * @param string $version
+     * @param string $manifestPath
      */
-    public function __construct($password, $fromName = '', $fromEmail = '')
+    public function __construct($password, $version = '1.0', $manifestPath = '')
     {
-        $this->password  = $password;
-        $this->fromName  = $fromName;
-        $this->fromEmail = $fromEmail;
+        if(empty($manifestPath)) {
+            $manifestPath = __DIR__ .'/manifests';
+        }
+
+        parent::__construct('', array(
+            'command.params' => array(
+                'key' => $password
+            ),
+            'request.options' => array(
+                'headers' => array(
+                    'Content-Type' => 'application/json; charset=utf-8'
+                ),
+            ),
+        ));
+
+        $this->setDescription(ServiceDescription::factory($manifestPath .'/'. $version .'.json'));
+        $this->setUserAgent('ScubaClick-Mandrill/' . self::VERSION, true);
     }
 
     /**
-     * Send an API call off to Mandrill
-     *
-     * @param string $method
-     * @param array  $args
+     * To view a list of all supported methods view the  
+     * current manifest
      */
-    public function request($method, $args = [])
+    public function __call($method, $args = array())
     {
-        $args['key'] = $this->password;
-
-        if(!isset($args['message']['from_name']) && !empty($this->fromName)) {
-            $args['message']['from_name']  = $this->fromName;
-        }
-
-        if(!isset($args['message']['from_email']) && !empty($this->fromEmail)) {
-            $args['message']['from_email'] = $this->fromEmail;
-        }
-
-        if(!isset($args['message']['track_clicks'])) {
-            $args['message']['track_clicks'] = true;
-        }
-
-        $client = new Client($this->endpoint);
-
-        $request = $client->post(
-            $method, 
-            array('Content-Type' => 'application/json; charset=utf-8'),
-            json_encode($args)
-        );
-
-        try
-        {
-            $response = $request->send();
-        }
-        catch(BadResponseException $exception)
-        {
-            $response = $exception->getResponse();
-        } 
-
-        return $response->json();
-    }
-
-    /**
-     * Make dynamic calls to all endpoints
-     *
-     * @param string $method
-     * @param array  $args
-     */
-    public function __call($func, $args)
-    {
-        $method = Str::snake($func, '-');
-
-        return $this->request('messages/'. $method .'.json', $args[0]);
+        return parent::__call(ucfirst($method), $args);
     }
 }
