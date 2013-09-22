@@ -2,6 +2,7 @@
     "name": "scubaclick/mandrill",
     "description": "Access the Mandrill API via Guzzle",
     "keywords": ["mandrill", "laravel", "guzzle"],
+    "homepage": "https://github.com/ScubaClick/scubaclick-mandrill",
     "license": "MIT",
     "authors": [
         {
