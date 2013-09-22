@@ -2,6 +2,7 @@ ScubaClick Mandrill
 ==================
 
 Provides a Guzzle service description to access the [Mandrill](https://mandrillapp.com) API.
+Still being developed for [ScubaClick](http://scubaclick.com), so handle with care for now!
 
 General Installation
 --------------------
