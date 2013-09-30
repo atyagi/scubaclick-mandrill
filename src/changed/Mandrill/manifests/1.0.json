@@ -1,0 +1,94 @@
+{
+    "name": "Mandrill",
+    "apiVersion": "1.0",
+    "baseUrl": "https://mandrillapp.com/api/1.0",
+    "description": "Transactional emails from the creators of Mailchimp",
+    "operations": {
+        "SendEmail": {
+            "httpMethod": "POST",
+            "uri": "messages/send.json",
+            "summary": "Send a transactional email via a template",
+            "parameters" : {
+                "key": {
+                    "required": true,
+                    "type": "string",
+                    "location": "json",
+                    "description": "The Mandrill API key"
+                },
+                "message": {
+                    "required": true,
+                    "type": "array",
+                    "location": "json",
+                    "description": "The configuration parameters for the message"
+                },
+                "async": {
+                    "required": false,
+                    "type": "boolean",
+                    "location": "json",
+                    "description": "Enable a background sending mode that is optimized for bulk sending."
+                },
+                "ip_pool": {
+                    "required": false,
+                    "type": "string",
+                    "location": "json",
+                    "description": "The name of the dedicated ip pool that should be used to send the message"
+                },
+                "sent_at": {
+                    "required": false,
+                    "type": "string",
+                    "location": "json",
+                    "description": "When this message should be sent as a UTC timestamp in YYYY-MM-DD HH:MM:SS format."
+                }
+            }
+        },
+        "SendEmailTemplate": {
+            "httpMethod": "POST",
+            "uri": "messages/send-template.json",
+            "summary": "Send a transactional email via a template",
+            "parameters" : {
+                "key": {
+                    "required": true,
+                    "type": "string",
+                    "location": "json",
+                    "description": "The Mandrill API key"
+                },
+                "template_name": {
+                    "required": true,
+                    "type": "string",
+                    "location": "json",
+                    "description": "The template name to send."
+                },
+                "template_content": {
+                    "required": true,
+                    "type": "array",
+                    "location": "json",
+                    "description": "The template content to send."
+                },
+                "message": {
+                    "required": true,
+                    "type": "array",
+                    "location": "json",
+                    "description": "The configuration parameters for the message"
+                },
+                "async": {
+                    "required": false,
+                    "type": "boolean",
+                    "location": "json",
+                    "description": "Enable a background sending mode that is optimized for bulk sending."
+                },
+                "ip_pool": {
+                    "required": false,
+                    "type": "string",
+                    "location": "json",
+                    "description": "The name of the dedicated ip pool that should be used to send the message"
+                },
+                "sent_at": {
+                    "required": false,
+                    "type": "string",
+                    "location": "json",
+                    "description": "When this message should be sent as a UTC timestamp in YYYY-MM-DD HH:MM:SS format."
+                }
+            }
+        }
+    }
+}
